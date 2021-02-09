@@ -62,6 +62,22 @@ app.post("/api/notes", function(req, res) {
 
 app.delete("/api/notes/:id", function (req, res) {
     let deleteNote = req.params.id;
+    console.log(deleteNote); 
+    console.log(typeof deleteNote);
+
+    //if deleteNote matches if of chosen note
+    //deletes item from list
+    for (let i = 0; i < notes.length; i++) {
+        if (deleteNote == "undefined") {
+            notes.splice(deleteNote, 1)
+        }
+
+        else if (deleteNote === (notes[i].id).toString()) {
+            notes.splice(i, 1)
+        }
+    }
+
+    
 
 });
 
