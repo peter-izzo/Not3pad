@@ -69,7 +69,7 @@ app.delete("/api/notes/:id", function (req, res) {
     //deletes item from list
     for (let i = 0; i < notes.length; i++) {
         if (deleteNote == "undefined") {
-            notes.splice(deleteNote, 1)
+            notes.splice(i, 1)
         }
 
         else if (deleteNote === (notes[i].id).toString()) {
@@ -77,6 +77,19 @@ app.delete("/api/notes/:id", function (req, res) {
         }
     }
 
+    for (let i = 0; i < notes.length; i++) {
+        notes[i].id = i + 1
+        
+    }
+
+    let newDB = JSON.stringify(notes)
+    fs.writeFileSync("./db/db.json", newDB, function(err) {
+        if (err) {
+            throw err
+        }
+    });
+
+    res.sendFile(path.join(__dirname, "/public/notes.html"));
     
 
 });
